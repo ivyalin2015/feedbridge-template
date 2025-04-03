@@ -6,23 +6,25 @@
 // SPDX-License-Identifier: MIT
 //
 
-import Image from 'next/image'
+'use client'
+
+import { Button } from '@stanfordspezi/spezi-web-design-system/components/Button'
+//import Image from 'next/image'
 import { generateGreeting } from '@stanfordbdhg/example-package'
+import { SpeziProvider } from '@stanfordspezi/spezi-web-design-system'
 
 export default function Home() {
   const greeting = generateGreeting()
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="flex flex-col items-center">
-        <Image
-          src={`${process.env.basePath ?? ''}/stanfordbiodesign.png`}
-          alt="Stanford Biodesign Logo"
-          width={634}
-          height={235}
-        />
-        <h1 className="mt-4 text-center text-3xl">{`${greeting.message} to the ${greeting.project}`}</h1>
+    <SpeziProvider>
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="flex flex-col items-center">
+          <h1 className="mt-4 text-center text-3xl">{`${greeting.message} to ${greeting.project}`}</h1>
+          <Button size="lg">Log in</Button>
+          <Button size="lg">Sign Up</Button>
+        </div>
       </div>
-    </div>
+    </SpeziProvider>
   )
 }

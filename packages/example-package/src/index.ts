@@ -17,7 +17,7 @@
 export function generateGreeting(): Greeting {
   return {
     message: 'Welcome',
-    project: 'Stanford Biodesign Digital Health Next.js Template',
+    project: 'Feedbridge',
   }
 }
 

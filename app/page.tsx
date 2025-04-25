@@ -8,10 +8,13 @@
 
 'use client'
 
-import { Button } from '@stanfordspezi/spezi-web-design-system/components/Button'
-//import Image from 'next/image'
+import {
+  SignInForm,
+  SpeziProvider,
+} from '@stanfordspezi/spezi-web-design-system'
+import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth'
 import { generateGreeting } from '@stanfordbdhg/example-package'
-import { SpeziProvider } from '@stanfordspezi/spezi-web-design-system'
+import { authen, googleProvider } from './firebase/app'
 
 export default function Home() {
   const greeting = generateGreeting()
@@ -19,10 +22,15 @@ export default function Home() {
   return (
     <SpeziProvider>
       <div className="flex min-h-screen items-center justify-center">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center space-y-9">
           <h1 className="mt-4 text-center text-3xl">{`${greeting.message} to ${greeting.project}`}</h1>
-          <Button size="lg">Log in</Button>
-          <Button size="lg">Sign Up</Button>
+          <SignInForm
+            auth={authen}
+            providers={[{ name: 'Google', provider: googleProvider }]}
+            enableEmailPassword={true} // or false if you only want Google sign-in
+            signInWithPopup={signInWithPopup}
+            signInWithEmailAndPassword={signInWithEmailAndPassword}
+          />
         </div>
       </div>
     </SpeziProvider>

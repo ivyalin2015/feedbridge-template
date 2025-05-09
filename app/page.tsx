@@ -9,10 +9,12 @@
 'use client'
 
 import {
+  Button,
   SignInForm,
   SpeziProvider,
 } from '@stanfordspezi/spezi-web-design-system'
 import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth'
+import Link from 'next/link'
 import { generateGreeting } from '@stanfordbdhg/example-package'
 import { authen, googleProvider } from './firebase/app'
 
@@ -27,10 +29,16 @@ export default function Home() {
           <SignInForm
             auth={authen}
             providers={[{ name: 'Google', provider: googleProvider }]}
-            enableEmailPassword={true} // or false if you only want Google sign-in
+            enableEmailPassword={false}
             signInWithPopup={signInWithPopup}
             signInWithEmailAndPassword={signInWithEmailAndPassword}
           />
+          <Button>
+            <Link href="/feedData">Input Feed Data</Link>
+          </Button>
+          <Button>
+            <Link href="/diaperEntry">Log Wet Diaper Entry</Link>
+          </Button>
         </div>
       </div>
     </SpeziProvider>
